@@ -3,10 +3,8 @@ from sort import heapSort
 from sort import quickSort
 from search import binarySearch
 
-space = "               "
 
-
-def _judge_sort(f_qsort: Callable) -> bool:
+def _judge_sort(f_qsort: Callable):
     l1 = []
     l2 = [1]
     l3 = [1, 2, 3]
@@ -21,27 +19,28 @@ def _judge_sort(f_qsort: Callable) -> bool:
         ll = l.copy()
         f_qsort(ll)
         if ll != sorted(l):
-            print("失败: 排序测试索引" + str(i) + "")
-            return False
+            return (False, i)
         continue
-    return True
+    return (True, 0)
 
 
 def judge_quicksort():
-    if not _judge_sort(quickSort.quicksort):
-        print("失败: 快速排序")
+    res = _judge_sort(quickSort.quicksort)
+    if not res[0]:
+        print_mresult("失败: 快速排序 索引:"+str(res[1]))
         return False
     else:
-        print(space + "成功: 快速排序")
+        print_mresult("成功: 快速排序")
         return True
 
 
 def judge_heapsort():
-    if not _judge_sort(heapSort.heapsort):
-        print("失败: 堆排序")
+    res = _judge_sort(heapSort.heapsort)
+    if not res[0]:
+        print_mresult("失败: 堆排序 索引:"+str(res[1]))
         return False
     else:
-        print(space + "成功: 堆排序")
+        print_mresult("成功: 堆排序")
         return True
 
 
@@ -56,31 +55,48 @@ def judge_search(f_binary_search: Callable) -> bool:
         if t[1] not in t[0]:
             try:
                 f_binary_search(t[0], t[1], 0, len(t[0]))
-                print("失败: 二分查找")
+                print_mresult("失败: 二分查找")
                 return False
             except ValueError:
                 continue
 
         if t[0].index(t[1], 0, len(t[0])) != f_binary_search(t[0], t[1], 0, len(t[0])):
-            print("失败: 二分查找")
+            print_mresult("失败: 二分查找")
             return False
-    print(space + "成功: 二分查找")
+    print_mresult("成功: 二分查找")
     return True
 
 
-def test_start():
-    str_begin = "\n\n=========  daily test begin  ==============\n\n"
-    str_end = "\n\n=========  daily test end  ==============\n\n"
+def print_mresult(s):
+    space = "          "
+    print(space+s)
 
-    print(str_begin)
+
+def print_dline(s):
+    str_dline = "  =========  "
+    print("\n"+str_dline+s+str_dline+"\n")
+
+
+def test_start():
+    print_mresult("\n")
+    print_dline("daily test begin")
+
     test_suite = [judge_quicksort(), judge_heapsort(),
                   judge_search(binarySearch.binary_search)]
-    for f in test_suite:
-        if not f:
-            print("训练未通过,请加油.")
-            return
-    print("测试全部通过!")
-    print(str_end)
+
+    def _test():
+        for f in test_suite:
+            if not f:
+                return False
+        return True
+    res = _test()
+    print_dline("daily test result")
+    if res:
+        print_mresult("测试全部通过!")
+    else:
+        print_mresult("训练未通过,请加油.")
+
+    print_dline("daily test end")
 
 
 test_start()
