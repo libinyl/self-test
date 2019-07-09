@@ -110,12 +110,12 @@ def judge_binarytree_lev_order(f_binarytree_lev_order: Callable) -> bool:
 
 
 def print_mresult(s):
-    space="          "
+    space = "          "
     print(space+s)
 
 
 def print_dline(s):
-    str_dline="  =========  "
+    str_dline = "  =========  "
     print("\n"+str_dline+s+str_dline+"\n")
 
 ########### 测试工具函数 end ###########
@@ -125,15 +125,16 @@ def test_start():
     print_mresult("\n")
     print_dline("daily test begin")
 
-    test_suite=[judge_quicksort(), judge_heapsort(),
-                  judge_search(binarySearch.binary_search), judge_binarytree_lev_order(binarytree_lev_order.binarytree_lev_order)]
+    test_suite = [judge_quicksort(), judge_heapsort(),
+                  judge_search(binarySearch.binary_search),
+                  judge_binarytree_lev_order(binarytree_lev_order.binarytree_lev_order)]
 
     def _test():
         for f in test_suite:
             if not f:
                 return False
         return True
-    res=_test()
+    res = _test()
     print_dline("daily test result")
     if res:
         print_mresult("测试全部通过!")
