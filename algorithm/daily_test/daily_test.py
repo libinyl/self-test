@@ -51,17 +51,17 @@ def judge_search(f_binary_search: Callable) -> bool:
     t4 = ([1, 2, 3], 2)
 
     l = [t1, t2, t3, t4]
-    for t in l:
+    for i,t in enumerate(l):
         if t[1] not in t[0]:
             try:
                 f_binary_search(t[0], t[1], 0, len(t[0]))
-                print_mresult("失败: 二分查找")
+                print_mresult("失败: 二分查找 索引:"+str(i))
                 return False
             except ValueError:
                 continue
 
         if t[0].index(t[1], 0, len(t[0])) != f_binary_search(t[0], t[1], 0, len(t[0])):
-            print_mresult("失败: 二分查找")
+            print_mresult("失败: 二分查找 索引:"+str(i))
             return False
     print_mresult("成功: 二分查找")
     return True
