@@ -1,12 +1,10 @@
 from typing import List
 
 
-# 思考模式:
-# 1. 递归
-# 2. 终止条件
-# 3. pivot
-# 4. 比较,增减
-# 5. 递归继续
+# 思路:
+# 两大部分:
+# 1. cutoff,注意 ij 增减了两次
+# 2. 分治,递归
 
 def _qs(arr: List[int], fst: int, lst: int):
 
