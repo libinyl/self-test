@@ -3,8 +3,12 @@ from typing import List
 
 # 思路:
 # 两大部分:
+# 1. 先分治,再递归
+# 2. 分治要求新增变量
 # 1. cutoff,注意 ij 增减了两次
-# 2. 分治,递归
+# 2. 中间交换 1 次
+# 3. 先分治,再递归
+# 递归的参数: 参数左边界到 j, i 到参数右边界
 
 def _qs(arr: List[int], fst: int, lst: int):
 
